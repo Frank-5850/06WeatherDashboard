@@ -45,11 +45,10 @@ searchEl.addEventListener("click", function (e) {
 });
 
 function showWeather() {
-  // cityNameEl.innerHTML = 
-  // currentTempEl.innerHTML =
-  // currentHumidityEl.innerHTML =
-  // currentWindEel.innerHTML =
-  // currentUVEl.innerHTML =
+  cityNameEl.innerHTML = `${weather.city}`;
+  currentTempEl.innerHTML = `${weather.temperature}`
+  currentHumidityEl.innerHTML =`${weather.humidity}`
+  currentWindEel.innerHTML =`${weather.wind_speed}`
 };
 
-  getWeather("Oakland");
+getWeather("Oakland");
