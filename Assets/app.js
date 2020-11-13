@@ -1,30 +1,39 @@
-var inputCityEl = document.getElementById("city-form");
-var searchEl = document.getElementById("city-button");
-var cityNameEl = document.getElementById("city-name");
+var inputCityEl = document.getElementById("cityForm");
+var searchEl = document.getElementById("cityButton");
+var cityNameEl = document.getElementById("cityName");
 var currentTempEl = document.getElementById("temperature");
 var currentHumidityEl = document.getElementById("humidity");
 var currentWindEel = document.getElementById("wind-speed");
 var currentUVEl = document.getElementById("UV-index");
 
-const APIkey = "af827e466de01437ddc96d9009bdc6d0";
+const APIkey = "d91f911bcf2c0f925fb6535547a5ddc9";
 
 function getWeather(cityName) {
-    let URL = 'https://api.openweathermap.org/data/2.5/weather?id=' + cityName + '&appid=' + APIkey;
-    fetch(URL)  
-    .then(function(resp) { 
-        console.log(resp) })
-        // Convert data to json
-//         console.log(resp)
-        return resp.json() } 
-    // .then(function(data) {
-//         console.log(data);
-//         console.log(data.name) })
-//         // catch any errors
-//     .catch(function(err) {
-//         console.log(err);
-//     });
+    var URL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${APIkey}`;
 
-// //   console.log(getWeather)
-  getWeather()
-// //   console.log(getWeather())
-    
+    fetch(URL)  
+    .then(function (response) { 
+      return response.json();
+    }) 
+    .then(function (data) {
+      console.log(data);
+    });
+  }
+
+inputCityEl.addEventListener("submit", function(e){
+  e.preventDefault();
+  var text = inputCityEl.value;
+  console.log(text);
+});
+
+searchEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  var text = inputCityEl.value;
+  console.log(text);
+});
+
+// function showWeather(cityName) {
+//   cityNameEl.innerHTML= data.city.name
+// }
+
+  getWeather("emeryville");
