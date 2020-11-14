@@ -45,6 +45,7 @@ inputCityEl.addEventListener("submit", function(e){
 searchEl.addEventListener("click", function (e) {
   e.preventDefault();
   var text = inputCityEl.value;
+  return getWeather(text)
   console.log(text);
 });
 
