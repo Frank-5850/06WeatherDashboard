@@ -25,7 +25,7 @@ function getWeather(cityName) {
     .then(function (data) {
       weather.city = data.city.name;
       weather.description = data.list[0].weather[0].description;
-      weather.temperature = data.list[0].main.feels_like;
+      weather.temperature = Math.floor((data.list[0].main.feels_like - 273)* 9/5 + 32);
       weather.humidity = data.list[0].main.humidity;
       weather.wind_speed = data.list[0].wind.speed;
       console.log(data);
@@ -46,7 +46,6 @@ searchEl.addEventListener("click", function (e) {
   e.preventDefault();
   var text = inputCityEl.value;
   return getWeather(text)
-  console.log(text);
 });
 
 // This gets the current date
@@ -62,9 +61,9 @@ function showWeather() {
   // currentDay.innerHTML = write(today);
   cityNameEl.innerHTML = `${weather.city}`;
   currentDescription.innerHTML = `${weather.description}`;
-  currentTempEl.innerHTML = `${weather.temperature}`;
+  currentTempEl.innerHTML = `${weather.temperature}° F`;
   currentHumidityEl.innerHTML =`${weather.humidity}`;
-  currentWindEel.innerHTML =`${weather.wind_speed}`;
+  currentWindEel.innerHTML =`${weather.wind_speed}` + " mph";
 };
 
-getWeather("Oakland");
+// getWeather("Oakland");
