@@ -62,43 +62,53 @@ console.log(today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear()
 
 // Display to the HTML
 function showWeather() {
-  currentDay.innerHTML = (today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear());
+
+  for (let i = 0; i < weather.data.length; i++) {
+    // console.log(weather.data[i])
+    var date = new Date(weather.data[i].dt * 1000)
+    var days = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat']
+    var newDay = days[date.getDay()]
+    var newDate = weather.data[i].dt_txt.slice(0, 10)
+    weather.data[i].dt = newDay
+    weather.data[i].dt_txt = newDate
+  }
+
+
+  currentDay.innerHTML = `${weather.data[0].dt_txt}`;
   cityNameEl.innerHTML = `${weather.name}`;
   currentDescription.innerHTML = `${weather.data[0].weather[0].description}`;
   currentTempEl.innerHTML = `${Math.floor((weather.data[0].main.feels_like - 273)* 9/5 + 32)}° F`;
   currentHumidityEl.innerHTML =`Humidity: ${weather.data[0].main.humidity}%`;
   currentWindEel.innerHTML =`${weather.data[0].wind.speed}` + " mph"; 
 
-  for (let i = 0; i < weather.data.length; i++) {
-    // console.log(weather.data[i])
-    var date = new Date(weather.data[i].dt * 1000)
-    var days = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat']
-    var newDate = days[date.getDay()]
-    weather.data[i].dt = newDate
-    console.log(weather.data[i].dt)
-  }
+
   var dayOne = document.createElement("div");
-  dayOne.innerHTML = `<div class="forecast-item__heading">${weather.data[6].dt}</div>
-    <div class="forecast-item__info"><span class="degrees">${Math.floor((weather.data[6].main.feels_like - 273)* 9/5 + 32)}° F</span></div>`;
+  dayOne.innerHTML = `<div>${weather.data[6].dt_txt}</div><div>${weather.data[6].dt}</div>
+    <div><span>${Math.floor((weather.data[6].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
+    <div>Humidity: ${weather.data[6].main.humidity}%</div>`;
   oneDay.appendChild(dayOne);
 
   var dayTwo = document.createElement("div");
-  dayTwo.innerHTML = `<div class="forecast-item__heading">${weather.data[14].dt}</div>
-    <div class="forecast-item__info"><span class="degrees">${Math.floor((weather.data[14].main.feels_like - 273)* 9/5 + 32)}° F</span></div>`;
+  dayTwo.innerHTML = `<div>${weather.data[14].dt_txt}</div><div>${weather.data[14].dt}</div>
+    <div><span>${Math.floor((weather.data[14].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
+    <div>Humidity: ${weather.data[14].main.humidity}%</div>`;
   twoDay.appendChild(dayTwo);
 
   var dayThree = document.createElement("div");
-  dayThree.innerHTML = `<div class="forecast-item__heading">${weather.data[22].dt}</div>
-    <div class="forecast-item__info"><span class="degrees">${Math.floor((weather.data[22].main.feels_like - 273)* 9/5 + 32)}° F</span></div>`;
+  dayThree.innerHTML = `<div>${weather.data[22].dt_txt}</div><div>${weather.data[22].dt}</div>
+    <div><span>${Math.floor((weather.data[22].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
+    <div>Humidity: ${weather.data[22].main.humidity}%</div>`;
   threeDay.appendChild(dayThree);
 
   var dayFour = document.createElement("div");
-  dayFour.innerHTML = `<div class="forecast-item__heading">${weather.data[30].dt}</div>
-    <div class="forecast-item__info"><span class="degrees">${Math.floor((weather.data[30].main.feels_like - 273)* 9/5 + 32)}° F</span></div>`;
+  dayFour.innerHTML = `<div>${weather.data[30].dt_txt}</div><div>${weather.data[30].dt}</div>
+    <div><span>${Math.floor((weather.data[30].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
+    <div>Humidity: ${weather.data[30].main.humidity}%</div>`;
   fourDay.appendChild(dayFour);
 
   var dayFive = document.createElement("div");
-  dayFive.innerHTML = `<div class="forecast-item__heading">${weather.data[38].dt}</div>
-    <div class="forecast-item__info"><span class="degrees">${Math.floor((weather.data[38].main.feels_like - 273)* 9/5 + 32)}° F</span></div>`;
+  dayFive.innerHTML = `<div>${weather.data[38].dt_txt}</div><div>${weather.data[38].dt}</div>
+    <div><span>${Math.floor((weather.data[38].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
+    <div>Humidity: ${weather.data[38].main.humidity}%</div>`;
   fiveDay.appendChild(dayFive);
 };
