@@ -15,6 +15,7 @@ var twoDay= document.getElementById("twoDaysAfter");
 var threeDay= document.getElementById("threeDaysAfter");
 var fourDay= document.getElementById("fourDaysAfter");
 var fiveDay= document.getElementById("fiveDaysAfter");
+var currentIcon = document.getElementById("dailyIcon");
 
 // API Key
 const APIkey = "d91f911bcf2c0f925fb6535547a5ddc9";
@@ -41,19 +42,29 @@ function getWeather(cityName) {
     });
   }
 
-
-
+function combineListeners () {
   form.addEventListener("submit", function(e){
-  e.preventDefault();
-  var text = inputCityEl.value;
-  return getWeather(text);
-});
-
-searchEl.addEventListener("click", function (e) {
-  e.preventDefault();
-  var text = inputCityEl.value;
-  return getWeather(text)
-});
+    e.preventDefault();
+    var text = inputCityEl.value;
+      function storeCity () {
+      window.localStorage.setItem("history", JSON.stringify(text));
+      console.log("hello")
+    }
+    storeCity()
+    return getWeather(text);
+  });
+  searchEl.addEventListener("click", function (e) {
+    e.preventDefault();
+    var text = inputCityEl.value;
+    function storeCity () {
+      window.localStorage.setItem("history", JSON.stringify(text));
+      console.log("hello")
+    }
+    storeCity()
+    return getWeather(text)
+  });
+}
+combineListeners();
 
 // This gets the current date
 var today = new Date();
@@ -79,35 +90,41 @@ function showWeather() {
   currentDescription.innerHTML = `${weather.data[0].weather[0].description}`;
   currentTempEl.innerHTML = `${Math.floor((weather.data[0].main.feels_like - 273)* 9/5 + 32)}° F`;
   currentHumidityEl.innerHTML =`Humidity: ${weather.data[0].main.humidity}%`;
-  currentWindEel.innerHTML =`${weather.data[0].wind.speed}` + " mph"; 
+  currentWindEel.innerHTML =`Wind-Speed: ${weather.data[0].wind.speed}mph`; 
+  currentIcon.innerHTML = `<img src="./Assets/Icons/${weather.data[0].weather[0].icon}.png" />`;
 
 
   var dayOne = document.createElement("div");
-  dayOne.innerHTML = `<div>${weather.data[6].dt_txt}</div><div>${weather.data[6].dt}</div>
+  dayOne.innerHTML = `<div class="futureDate">${weather.data[6].dt_txt}</div><div class="futureDay">${weather.data[6].dt}</div>
+    <img src="./Assets/Icons/${weather.data[6].weather[0].icon}.png" /><div>${weather.data[6].weather[0].description}</div>
     <div><span>${Math.floor((weather.data[6].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
     <div>Humidity: ${weather.data[6].main.humidity}%</div>`;
   oneDay.appendChild(dayOne);
 
   var dayTwo = document.createElement("div");
-  dayTwo.innerHTML = `<div>${weather.data[14].dt_txt}</div><div>${weather.data[14].dt}</div>
+  dayTwo.innerHTML = `<div class="futureDate">${weather.data[14].dt_txt}</div><div class="futureDay">${weather.data[14].dt}</div>
+    <img src="./Assets/Icons/${weather.data[14].weather[0].icon}.png" /><div>${weather.data[14].weather[0].description}</div>
     <div><span>${Math.floor((weather.data[14].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
     <div>Humidity: ${weather.data[14].main.humidity}%</div>`;
   twoDay.appendChild(dayTwo);
 
   var dayThree = document.createElement("div");
-  dayThree.innerHTML = `<div>${weather.data[22].dt_txt}</div><div>${weather.data[22].dt}</div>
+  dayThree.innerHTML = `<div class="futureDate">${weather.data[22].dt_txt}</div><div class="futureDay">${weather.data[22].dt}</div>
+    <img src="./Assets/Icons/${weather.data[22].weather[0].icon}.png" /><div>${weather.data[22].weather[0].description}</div>
     <div><span>${Math.floor((weather.data[22].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
     <div>Humidity: ${weather.data[22].main.humidity}%</div>`;
   threeDay.appendChild(dayThree);
 
   var dayFour = document.createElement("div");
-  dayFour.innerHTML = `<div>${weather.data[30].dt_txt}</div><div>${weather.data[30].dt}</div>
+  dayFour.innerHTML = `<div class="futureDate">${weather.data[30].dt_txt}</div><div class="futureDay">${weather.data[30].dt}</div>
+    <img src="./Assets/Icons/${weather.data[30].weather[0].icon}.png" /><div>${weather.data[30].weather[0].description}</div>
     <div><span>${Math.floor((weather.data[30].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
     <div>Humidity: ${weather.data[30].main.humidity}%</div>`;
   fourDay.appendChild(dayFour);
 
   var dayFive = document.createElement("div");
-  dayFive.innerHTML = `<div>${weather.data[38].dt_txt}</div><div>${weather.data[38].dt}</div>
+  dayFive.innerHTML = `<div class="futureDate">${weather.data[38].dt_txt}</div><div class="futureDay">${weather.data[38].dt}</div>
+    <img src="./Assets/Icons/${weather.data[38].weather[0].icon}.png" /><div>${weather.data[38].weather[0].description}</div>
     <div><span>${Math.floor((weather.data[38].main.feels_like - 273)* 9/5 + 32)}° F</span></div>
     <div>Humidity: ${weather.data[38].main.humidity}%</div>`;
   fiveDay.appendChild(dayFive);
